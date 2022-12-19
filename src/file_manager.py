@@ -20,9 +20,9 @@ class FileManager:
     return os.listdir(self.__path)
 
   def read(self, filename: str) -> str:
-    f = open(self.__full_path(filename), "r")
-    sql = f.read()
-    f.close()
+    file = open(self.__full_path(filename), "r")
+    sql = file.read()
+    file.close()
     return sql
 
   def __full_path(self, filename: str) -> str:
