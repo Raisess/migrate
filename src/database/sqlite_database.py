@@ -7,7 +7,7 @@ class SqliteDatabase(AbstractDatabase):
     super().__init__(connection_opts)
 
     self.__conn = sqlite3.connect(
-      database = connection_opts.host + ".db",
+      database = connection_opts.database + ".db",
       check_same_thread = False
     )
 

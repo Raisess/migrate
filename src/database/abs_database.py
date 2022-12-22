@@ -1,5 +1,6 @@
 class DatabaseConnectionOpts:
-  def __init__(self, host: str, user: str, password: str, port: int):
+  def __init__(self, database: str, host: str, user: str, password: str, port: int):
+    self.database = database
     self.host = host
     self.password = password
     self.port = port
