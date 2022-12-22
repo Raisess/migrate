@@ -1,5 +1,4 @@
 import datetime
-import sys
 
 from commands.abs_command import AbstractCommand
 from util.file_manager import FileManager
