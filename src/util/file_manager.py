@@ -7,7 +7,7 @@ class FileManager:
     if not os.path.isdir(self.__path):
       os.mkdir(self.__path)
 
-  def create(self, filename: str, content: str = "") -> None:
+  def create(self, filename: str, content: str = "") -> str:
     full_path = self.__full_path(filename)
     if os.path.exists(full_path):
       raise FileExistsError(full_path)
@@ -15,6 +15,8 @@ class FileManager:
     with open(full_path, "w") as file:
       file.write(content)
       file.close()
+
+    return full_path
 
   def list(self) -> list[str]:
     return os.listdir(self.__path)
