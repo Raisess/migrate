@@ -2,7 +2,7 @@ import sqlite3
 
 from database.abs_database import AbstractDatabase, DatabaseConnectionOpts
 
-class Sqlite(AbstractDatabase):
+class SqliteDatabase(AbstractDatabase):
   def __init__(self, connection_opts: DatabaseConnectionOpts):
     super().__init__(connection_opts)
 

@@ -1,6 +1,6 @@
 from database.abs_database import AbstractDatabase, DatabaseConnectionOpts
-from database.postgres_impl import Postgres
-from database.sqlite_impl import Sqlite
+from database.postgres_database import PostgresDatabase
+from database.sqlite_database import SqliteDatabase
 
 class DatabaseEnum:
   Postgres = "postgres"
@@ -13,8 +13,8 @@ class DatabaseFactory:
     connection_opts: DatabaseConnectionOpts
   ) -> AbstractDatabase:
     if database == DatabaseEnum.Postgres:
-      return Postgres(connection_opts)
+      return PostgresDatabase(connection_opts)
     elif database == DatabaseEnum.Sqlite:
-      return Sqlite(connection_opts)
+      return SqliteDatabase(connection_opts)
     else:
       raise Exception("Invalid database")
