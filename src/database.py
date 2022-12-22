@@ -12,5 +12,5 @@ class Database:
   def get_connection_opts(self) -> DatabaseConnectionOpts:
     return self.__connection_opts
 
-  def query(sql: str, args: list[str | int | bool] = ()) -> list[any]:
+  def query(self, sql: str, args: list[str | int | bool] = ()) -> list[any]:
     pass
