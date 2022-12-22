@@ -3,29 +3,26 @@
 import datetime
 import sys
 
+from commands.abs_command import AbstractCommand
+from commands.create_migration_command import CreateMigrationCommand
 from database.abs_database import DatabaseConnectionOpts
 from database.database_factory import DatabaseFactory
 from util.file_manager import FileManager
 
 DEFAULT_MIGRATION_DIR = "__migrations"
 
+file_manager = FileManager(DEFAULT_MIGRATION_DIR)
+create_migration_command = CreateMigrationCommand(file_manager)
+
 if __name__ == "__main__":
   if len(sys.argv) < 2:
     raise Exception(f"Invalid arguments, try {sys.argv[0]} command")
 
-  fm = FileManager(DEFAULT_MIGRATION_DIR)
-
   command = sys.argv[1]
+  arguments = AbstractCommand.SliceArguments(sys.argv)
+
   if command == "create":
-    if len(sys.argv) < 3:
-      raise Exception(f"Invalid arguments, filename not provided")
-
-    filename = sys.argv[2]
-    timestamp = int(datetime.datetime.utcnow().timestamp())
-    migration_filename = f"{timestamp}_{filename}.sql"
-    fm.create(migration_filename)
-
-    print(f"Created new migration: ./{DEFAULT_MIGRATION_DIR}/{migration_filename}")
+    create_migration_command.handle(arguments)
   elif command == "run":
     if len(sys.argv) < 3:
       raise Exception(f"Invalid arguments, database name not provided")
@@ -34,8 +31,8 @@ if __name__ == "__main__":
     opts = DatabaseConnectionOpts("localhost", "user", "pass", 5432)
     database = DatabaseFactory.Init(database_name, opts)
 
-    files = fm.list()
+    files = file_manager.list()
     for file in files:
-      print(fm.read(file))
+      print(file_manager.read(file))
   else:
     raise Exception("Invalid command")
