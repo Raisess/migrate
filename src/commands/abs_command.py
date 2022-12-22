@@ -13,5 +13,9 @@ class AbstractCommand:
   def get_required_args_len(self) -> int:
     return self.__required_args_len
 
+  def validate_args_len(self, args: list[str], exception: Exception) -> None:
+    if len(args) < self.get_required_args_len():
+      raise exception
+
   def handle(self, args: list[str]) -> None:
     pass

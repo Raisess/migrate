@@ -5,12 +5,14 @@ from util.file_manager import FileManager
 
 class CreateMigrationCommand(AbstractCommand):
   def __init__(self, file_manager: FileManager):
-    super().__init__("create", 1)
+    super().__init__(command="create", required_args_len=1)
     self.__file_manager = file_manager
 
   def handle(self, args: list[str]) -> None:
-    if len(args) < self.get_required_args_len():
-      raise Exception(f"Invalid arguments, filename not provided")
+    self.validate_args_len(
+      args,
+      Exception("Invalid arguments, filename not provided")
+    )
 
     filename = args[0]
     timestamp = int(datetime.datetime.utcnow().timestamp())
