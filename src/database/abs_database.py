@@ -5,7 +5,7 @@ class DatabaseConnectionOpts:
     self.port = port
     self.user = user
 
-class Database:
+class AbstractDatabase:
   def __init__(self, connection_opts: DatabaseConnectionOpts):
     self.__connection_opts = connection_opts
 

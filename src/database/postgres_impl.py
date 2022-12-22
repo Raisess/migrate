@@ -1,6 +1,6 @@
-from database import Database, DatabaseConnectionOpts
+from database.abs_database import AbstractDatabase, DatabaseConnectionOpts
 
-class Postgres(Database):
+class Postgres(AbstractDatabase):
   def __init__(self, connection_opts: DatabaseConnectionOpts):
     super().__init__(connection_opts)
 
