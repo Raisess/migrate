@@ -23,9 +23,9 @@ class SqliteDatabase(AbstractDatabase):
 
   def execute(self, migration: DatabaseMigrationModel) -> bool:
     result = self.query("SELECT COUNT(1) FROM __migrations WHERE hash = ?", [migration.hash])
-    execute_times = result[0][0]
+    executed_times = result[0][0]
 
-    if execute_times >= 1:
+    if executed_times >= 1:
       return False
 
     self.query(migration.query)
