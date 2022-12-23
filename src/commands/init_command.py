@@ -6,7 +6,11 @@ from database.database_factory import DatabaseFactory
 
 class InitCommand(AbstractCommand):
   def __init__(self):
-    super().__init__("init", 1)
+    super().__init__(
+      "init",
+      "Create '__migrations' table into the target database.",
+      required_args_len=1
+    )
 
   def handle(self, args: list[str]) -> None:
     self.validate_args_len(

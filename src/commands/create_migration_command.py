@@ -5,7 +5,11 @@ from util.file_manager import FileManager
 
 class CreateMigrationCommand(AbstractCommand):
   def __init__(self, file_manager: FileManager):
-    super().__init__(command="create", required_args_len=1)
+    super().__init__(
+      "create",
+      "Create a new '.sql' file into migrations directory.",
+      required_args_len=1
+    )
     self.__file_manager = file_manager
 
   def handle(self, args: list[str]) -> None:

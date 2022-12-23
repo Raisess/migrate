@@ -7,7 +7,11 @@ from util.file_manager import FileManager
 
 class RunMigrationsCommand(AbstractCommand):
   def __init__(self, file_manager: FileManager):
-    super().__init__(command="run", required_args_len=1)
+    super().__init__(
+      "run",
+      "Run all '.sql' files from the migrations directory into the target database.",
+      required_args_len=1
+    )
     self.__file_manager = file_manager
 
   def handle(self, args: list[str]) -> None:
