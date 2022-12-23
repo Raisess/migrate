@@ -1,7 +1,7 @@
 import os
 
 from commands.abs_command import AbstractCommand
-from database.abs_database import DatabaseConnectionOpts, DatabaseMigration
+from database.abs_database import DatabaseConnectionOpts
 from database.database_factory import DatabaseFactory
 
 class InitCommand(AbstractCommand):
@@ -23,4 +23,4 @@ class InitCommand(AbstractCommand):
       os.getenv("DB_PORT") or 5432
     )
     database = DatabaseFactory.Init(database_name, database_opts)
-    database.query(DatabaseMigration.TableQuery())
+    database.query(database.get_create_table_query())
