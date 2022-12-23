@@ -3,7 +3,7 @@ class AbstractCommand:
   def SliceArguments(argv: list[str]) -> list[str]:
     return argv[2:]
 
-  def __init__(self, command: str, required_args_len: int):
+  def __init__(self, command: str, required_args_len: int = 0):
     self.__command = command
     self.__required_args_len = required_args_len
 

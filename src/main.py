@@ -4,12 +4,14 @@ import sys
 
 from commands.abs_command import AbstractCommand
 from commands.create_migration_command import CreateMigrationCommand
+from commands.init_command import InitCommand
 from commands.run_migrations_command import RunMigrationsCommand
 from util.file_manager import FileManager
 
 DEFAULT_MIGRATION_DIR = "__migrations"
 
 file_manager = FileManager(DEFAULT_MIGRATION_DIR)
+init_command = InitCommand()
 create_migration_command = CreateMigrationCommand(file_manager)
 run_migrations_command = RunMigrationsCommand(file_manager)
 
@@ -20,7 +22,9 @@ if __name__ == "__main__":
   command = sys.argv[1]
   arguments = AbstractCommand.SliceArguments(sys.argv)
 
-  if command == "create":
+  if command == "init":
+    init_command.handle(arguments)
+  elif command == "create":
     create_migration_command.handle(arguments)
   elif command == "run":
     run_migrations_command.handle(arguments)
