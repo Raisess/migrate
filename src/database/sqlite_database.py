@@ -11,10 +11,10 @@ class SqliteDatabase(AbstractDatabase):
       check_same_thread = False
     )
 
-  def query(self, sql: str, args: list[str | int | bool] = ()) -> list[any]:
+  def query(self, sql: str, args: list[str | int | bool] | dict = ()) -> list[any]:
     try:
       cursor = self.__conn.cursor()
-      cursor.execute(sql, args)
+      cursor.execute(sql.strip(), args)
       self.__conn.commit()
       return cursor.fetchall()
     except Exception as exception:
@@ -22,13 +22,13 @@ class SqliteDatabase(AbstractDatabase):
       raise exception
 
   def execute(self, migration: DatabaseMigrationModel) -> bool:
-    result = self.query("SELECT COUNT(1) FROM __migrations WHERE hash = ?", [migration.hash])
+    result = self.query("SELECT COUNT(1) FROM __migrations WHERE hash = ?;", [migration.hash])
     executed_times = result[0][0]
 
     if executed_times >= 1:
       return False
 
-    self.query(migration.query)
+    self.query(migration.query.strip())
     self.query(
       "INSERT INTO __migrations(id, name, hash, date) VALUES(?, ?, ?, ?);",
       [migration.id, migration.name, migration.hash, migration.date]

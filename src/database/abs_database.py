@@ -10,6 +10,7 @@ class DatabaseConnectionOpts:
     self.password = password
     self.port = port
 
+
 class DatabaseMigrationModel:
   def __init__(self, name: str, query: str):
     self.name = name
@@ -18,6 +19,7 @@ class DatabaseMigrationModel:
     self.date = datetime.utcnow().isoformat()
     self.hash = sha256(query.encode("utf-8")).hexdigest()
 
+
 class AbstractDatabase:
   def __init__(self, connection_opts: DatabaseConnectionOpts):
     self.__connection_opts = connection_opts
@@ -25,18 +27,19 @@ class AbstractDatabase:
   def get_create_table_query(self) -> str:
     return """
       CREATE TABLE IF NOT EXISTS __migrations(
-        id VARCHAR(36) UNIQUE,
+        id VARCHAR(36) UNIQUE PRIMARY KEY,
         name VARCHAR(100),
         hash VARCHAR(64) UNIQUE,
-        date VARCHAR(20)
+        date VARCHAR(30)
       );
     """
 
   def get_connection_opts(self) -> DatabaseConnectionOpts:
     return self.__connection_opts
 
-  def query(self, sql: str, args: list[str | int | bool] = ()) -> list[any]:
+  def query(self, sql: str, args: list[str | int | bool] | dict = ()) -> list[any]:
     pass
 
+  # Should execute a migration file once and make sure will run only once
   def execute(self, migration: DatabaseMigrationModel) -> bool:
     pass
