@@ -30,7 +30,7 @@ class AbstractDatabase:
         id VARCHAR(36) UNIQUE PRIMARY KEY,
         name VARCHAR(100),
         hash VARCHAR(64) UNIQUE,
-        date VARCHAR(20)
+        date VARCHAR(30)
       );
     """
 
