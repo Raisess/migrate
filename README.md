@@ -5,7 +5,7 @@ A simple CLI to manage database migrations.
 ## Available databases
 
 - [x] Sqlite
-- [ ] PostgreSQL
+- [x] PostgreSQL
 - [ ] MariaDB
 - [ ] MySQL
 
