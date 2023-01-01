@@ -26,11 +26,11 @@ class AbstractDatabase:
     self.__connection_opts = connection_opts
 
   def query(self, sql: str, args: list[str | int | bool] | dict = ()) -> list[any]:
-    pass
+    raise NotImplemented()
 
   # Should execute a migration file once and make sure will run only once
   def execute(self, migration: DatabaseMigrationModel) -> bool:
-    pass
+    raise NotImplemented()
 
   def prepare(self) -> None:
     self.query(self.__get_create_table_query())
