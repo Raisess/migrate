@@ -27,4 +27,4 @@ class InitCommand(AbstractCommand):
       os.getenv("DB_PORT") or 5432
     )
     database = DatabaseFactory.Init(database_name, database_opts)
-    database.query(database.get_create_table_query())
+    database.prepare()
