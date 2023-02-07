@@ -1,5 +1,6 @@
 from datetime import datetime
 from hashlib import sha256
+from urllib import parse
 from uuid import uuid4
 
 class DatabaseConnectionOpts:
@@ -7,7 +8,7 @@ class DatabaseConnectionOpts:
     self.database = database
     self.host = host
     self.user = user
-    self.password = password
+    self.password = parse.quote(password)
     self.port = port
 
 
