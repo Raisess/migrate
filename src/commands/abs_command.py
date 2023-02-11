@@ -22,4 +22,4 @@ class AbstractCommand:
       raise exception
 
   def handle(self, args: list[str]) -> None:
-    pass
+    raise NotImplemented()
