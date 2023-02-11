@@ -1,10 +1,10 @@
-from database.abs_database import AbstractDatabase, DatabaseConnectionOpts, DatabaseMigrationModel
+from database.abs_database import AbstractDatabase, ArgumentsType, DatabaseConnectionOpts, DatabaseMigrationModel
 
 class MySqlDatabase(AbstractDatabase):
   def __init__(self, connection_opts: DatabaseConnectionOpts):
     super().__init__(connection_opts)
 
-  def query(self, sql: str, args: list[str | int | bool] | dict = ()) -> list[any]:
+  def query(self, sql: str, args: ArgumentsType = ()) -> list[any]:
     pass
 
   def execute(self, migration: DatabaseMigrationModel) -> bool:

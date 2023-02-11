@@ -21,11 +21,13 @@ class DatabaseMigrationModel:
     self.hash = sha256(query.encode("utf-8")).hexdigest()
 
 
+ArgumentsType = list[str | int | bool] | dict
+
 class AbstractDatabase:
   def __init__(self, connection_opts: DatabaseConnectionOpts):
     self.__connection_opts = connection_opts
 
-  def query(self, sql: str, args: list[str | int | bool] | dict = ()) -> list[any]:
+  def query(self, sql: str, args: ArgumentsType) -> list[any]:
     raise NotImplemented()
 
   # Should execute a migration file once and make sure will run only once
