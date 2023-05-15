@@ -6,8 +6,7 @@ A simple CLI to manage database migrations.
 
 - [x] Sqlite
 - [x] PostgreSQL
-- [ ] MariaDB
-- [ ] MySQL
+- [x] MySQL
 
 ## Enviroment variables
 

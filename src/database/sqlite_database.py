@@ -1,6 +1,6 @@
 import sqlite3
 
-from database.abs_database import AbstractDatabase, DatabaseConnectionOpts, DatabaseMigrationModel
+from database.abs_database import AbstractDatabase, ArgumentsType, DatabaseConnectionOpts, DatabaseMigrationModel
 
 class SqliteDatabase(AbstractDatabase):
   def __init__(self, connection_opts: DatabaseConnectionOpts):
@@ -11,7 +11,7 @@ class SqliteDatabase(AbstractDatabase):
       check_same_thread = False
     )
 
-  def query(self, sql: str, args: list[str | int | bool] | dict = ()) -> list[any]:
+  def query(self, sql: str, args: ArgumentsType = ()) -> list[any]:
     try:
       cursor = self.__conn.cursor()
       cursor.execute(sql.strip(), args)
