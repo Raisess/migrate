@@ -21,7 +21,8 @@ class DatabaseMigrationModel:
     self.hash = sha256(query.encode("utf-8")).hexdigest()
 
 
-ArgumentsType = list[str | int | bool] | dict
+PrimitiveType = str | int | bool
+ArgumentsType = tuple[PrimitiveType] | list[PrimitiveType] | dict[str, PrimitiveType]
 
 class AbstractDatabase:
   def __init__(self, connection_opts: DatabaseConnectionOpts):
