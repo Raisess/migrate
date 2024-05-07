@@ -19,7 +19,9 @@ class FileManager:
     return full_path
 
   def list(self) -> list[str]:
-    return os.listdir(self.__path)
+    files = os.listdir(self.__path)
+    files.sort()
+    return files
 
   def read(self, filename: str) -> str:
     file = open(self.__full_path(filename), "r")

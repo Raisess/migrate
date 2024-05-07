@@ -29,8 +29,10 @@ class RunMigrationsCommand(Command):
     if not len(files):
       raise Exception("No migrations found")
 
-    files.sort()
     for filename in files:
+      if not filename.endswith('.sql'):
+        continue
+
       try:
         print(f"==> Executing migration: {filename}")
         executed = database.execute(DatabaseMigrationModel(filename, self.__file_manager.read(filename)))
